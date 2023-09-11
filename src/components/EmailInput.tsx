@@ -9,7 +9,7 @@ import { faEnvelope, faPhone, faX } from '@fortawesome/free-solid-svg-icons'
 const EmailInput: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
 
@@ -22,21 +22,14 @@ const EmailInput: React.FC = () => {
   const handleStartGame = () => {
     if (isValidEmail) {
       if (!email) {
-      // Display an alert if the email field is empty
-      alert('Please enter an email');
-      return;
-    }
-      // Show loading state
+        alert('Please enter an email');
+        return;
+      }
       setIsLoading(true);
-
-      // Simulate a mock API call with a delay
       setTimeout(() => {
-        // Replace this with actual API call logic
-        // For now, we're just setting a message
-        // alert(`Mock API call successful for email: ${email}`);
         setIsLoading(false);
         navigate('/game');
-      }, 2000); // Simulate a 2-second API call
+      }, 2000);
 
     } else {
       alert('Please enter a valid email.');
@@ -85,8 +78,8 @@ const EmailInput: React.FC = () => {
             </div>
           </div>
           <div className='flex justify-start items-center mb-4 pl-5 gap-4 border rounded-md border-black w-80 h-16'>
-            <input type='checkbox' required className='w-6 h-6'/>
-            <p className='text-xs'>I agree to receiving recurring automated messages at the number I have provided. <br/> Consent is not a condition to purchase.</p>
+            <input type='checkbox' required className='w-6 h-6' />
+            <p className='text-xs'>I agree to receiving recurring automated messages at the number I have provided. <br /> Consent is not a condition to purchase.</p>
           </div>
           <button className='bg-green-500 w-80 h-16 rounded-full' onClick={handleStartGame}>
             <span className='font-bold text-white text-2xl'>Try Your Luck</span>
