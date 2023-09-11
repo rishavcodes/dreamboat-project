@@ -5,6 +5,7 @@ import treeObj2 from '../assets/Mask group.png'
 import WheelImg from '../assets/wheeel.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faPhone, faX } from '@fortawesome/free-solid-svg-icons'
+import { fetchUserData } from '../api';
 
 const EmailInput: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -19,17 +20,26 @@ const EmailInput: React.FC = () => {
     setIsValidEmail(validateEmail(inputEmail));
   };
 
-  const handleStartGame = () => {
+  const handleStartGame = async () => {
     if (isValidEmail) {
       if (!email) {
         alert('Please enter an email');
         return;
       }
       setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-        navigate('/game');
-      }, 2000);
+      // setTimeout(() => {
+      //   setIsLoading(false);
+      //   navigate('/game');
+      // }, 2000);
+      try {
+      const userData = await fetchUserData(email);
+      
+      // Use navigate to navigate to the game page with user data
+      navigate('/game', { state: { userData } });
+    } catch (error) {
+      console.error('API call failed:', error);
+      alert('Failed to fetch user data. Please try again later.');
+    } 
 
     } else {
       alert('Please enter a valid email.');
